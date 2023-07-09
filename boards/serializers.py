@@ -19,26 +19,8 @@ class BoardSerializer(serializers.ModelSerializer):
             "title",
             "content"
         ]
-
-class BoardDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Board
-        fields = [
-            "author",
-            "title",
-            "content"
-        ]
         
 class CommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Comment
-        fields = [
-            'user',
-            'board',
-            'content'
-        ]
-        
-class CommentDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = [

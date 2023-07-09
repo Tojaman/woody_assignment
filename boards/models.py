@@ -6,8 +6,8 @@ class User(models.Model):
     user_id = models.CharField("아이디", unique=True, max_length=20)
     user_pw = models.CharField("비밀번호", max_length=20)
     
-    class Meta:
-        db_table = 'user'  # 테이블 이름을 설정합니다.
+    # class Meta:
+    #     db_table = 'user'  # 테이블 이름을 설정합니다.
 
 class Board(models.Model):
     # 글의 제목, 내용, 작성일, 마지막 수정일
@@ -31,3 +31,6 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comment", verbose_name="아이디")
     board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name="comment", null=True, verbose_name="게시물")
     content = models.TextField("내용", blank=True)
+    
+    def __str__(self):
+        return self.content
