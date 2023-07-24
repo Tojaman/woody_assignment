@@ -56,13 +56,11 @@ class BoardDeleteAPIView(APIView):
     @swagger_auto_schema(operation_id="게시글 삭제")
     # 게시판 id를 입력 받아서 존재 하는 게시글이라면 삭제
     def delete(self, request, board_id):
-        serializer = BoardSerializer(data=request.data)
-        if serializer.is_valid():
             # 존재하는 게시글이라면 board 객체 추출
-            try:
-                board = Board.objects.get(id=board_id)
-            except Board.DoesNotExist:
-                return Response({"message": "존재하지 않는 게시글입니다."}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            board = Board.objects.get(id=board_id)
+        except Board.DoesNotExist:
+            return Response({"message": "존재하지 않는 게시글입니다."}, status=status.HTTP_400_BAD_REQUEST)
 
         # 게시글 삭제
         board.delete()
@@ -128,7 +126,6 @@ class CommentUpdateAPIView(APIView):
 class CommentDeleteAPIView(APIView):
     @swagger_auto_schema(operation_id="댓글 삭제")
     def delete(self, request, comment_id, author_id):
-        author = Comment.objects.get(id=author_id)
         try:
             # 주어진 댓글 ID로 댓글을 찾습니다.
             comment = Comment.objects.get(id=comment_id)
@@ -136,7 +133,7 @@ class CommentDeleteAPIView(APIView):
             return Response({"message": "해당 댓글이 존재하지 않습니다."}, status=status.HTTP_404_NOT_FOUND)
 
         # 댓글 작성자와 요청을 보낸 사용자가 동일한지 확인합니다.
-        if comment.author_id != author.author_id:
+        if comment.user.id != author_id:
             return Response({"message": "댓글 작성자만 삭제할 수 있습니다."}, status=status.HTTP_403_FORBIDDEN)
 
         # 댓글 삭제
