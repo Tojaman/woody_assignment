@@ -1,6 +1,7 @@
 # woody_assignment
 
 
+<img width="1072" alt="image" src="https://github.com/Tojaman/woody_assignment/assets/89668546/9545bb37-1670-4d6b-b0a8-881a1bae5c22">
 
 
 board
