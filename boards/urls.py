@@ -9,6 +9,6 @@ urlpatterns = [
     path("user/<int:pk>/", views.UserAPIView.as_view()),
     path("board/", views.BoardAPIView.as_view()),
     path("board/<int:pk>/", views.BoardDetailAPIView.as_view()),
+    path("comment/<int:board_id>", views.CommentAPIView.as_view()),
     path("comment/", views.CommentAPIView.as_view()),
-    path("comment/<int:pk>/", views.CommentAPIView.as_view())
 ]
