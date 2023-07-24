@@ -1,6 +1,8 @@
 # woody_assignment
 
+<img width="1076" alt="image" src="https://github.com/Tojaman/woody_assignment/assets/89668546/f8302e9d-74a6-4029-b78e-497c5782b077">
 
+<img width="1072" alt="image" src="https://github.com/Tojaman/woody_assignment/assets/89668546/9545bb37-1670-4d6b-b0a8-881a1bae5c22">
 
 
 board
@@ -14,3 +16,6 @@ comment
 
 user
 <img width="1065" alt="image" src="https://github.com/Tojaman/woody_assignment/assets/89668546/8071d97e-9dc4-4cac-b88c-8ad447bb9738">
+
+
+<img width="153" alt="image" src="https://github.com/Tojaman/woody_assignment/assets/89668546/0dfcb2d3-e750-4adf-9146-9cfb677c62aa">
