@@ -4,6 +4,9 @@ from rest_framework import generics, mixins
 from django.shortcuts import render # user id, pw 입력 칸 만들기
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import status
+
 
 class UserAPIView(APIView):
     @swagger_auto_schema(request_body=UserSerializer, operation_id="유저 생성")
@@ -24,7 +27,7 @@ class UserDeleteAPIView(APIView):
             return Response({"message": "해당 유저가 존재하지 않습니다."}, status=status.HTTP_404_NOT_FOUND)
 
 class BoardAPIView(APIView):
-    @swagger_auto_schema(request_body=BoardSerializer, operation_id="게시글 조회")
+    @swagger_auto_schema(operation_id="게시글 조회")
     def get(self, request):
         # 게시글 객체 전부 가져옴(orm)
         boards = Board.objects.all()
@@ -109,21 +112,21 @@ class CommentUpdateAPIView(APIView):
         except Comment.DoesNotExist:
             return Response({"message": "존재하지 않는 댓글입니다."}, status=status.HTTP_404_NOT_FOUND)
 
-        board_id = request.data.get('board_id')
+        board_id = request.data.get('board')
         # 게시글 번호로 해당 게시글이 존재하는지 확인
-        try:
-            board = Board.objects.get(id=board_id)
-        except Board.DoesNotExist:
+        
+        comment_exist = Comment.objects.filter(id=board_id).exists()
+        if comment_exist:
+            serializer = CommentSerializer(comment, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
             return Response({"message": "존재하지 않는 게시글입니다."}, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer = CommentSerializer(comment, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CommentDeleteAPIView(APIView):
+    @swagger_auto_schema(operation_id="댓글 삭제")
     def delete(self, request, comment_id, author_id):
         author = Comment.objects.get(id=author_id)
         try:
