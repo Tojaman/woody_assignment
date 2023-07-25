@@ -1,5 +1,12 @@
 # woody_assignment
 
+구현한 내용
+1. mysql 연동
+2. ForeignKey 이용한 관계 설정
+3. 장고 orm
+4. swagger 사용법
+5. 그 외 더 있었는데 싹 다 날아가서 .. 기억이 안나요 ㅠ
+
 <img width="1076" alt="image" src="https://github.com/Tojaman/woody_assignment/assets/89668546/f8302e9d-74a6-4029-b78e-497c5782b077">
 
 <img width="1072" alt="image" src="https://github.com/Tojaman/woody_assignment/assets/89668546/9545bb37-1670-4d6b-b0a8-881a1bae5c22">
